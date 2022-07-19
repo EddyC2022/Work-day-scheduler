@@ -1,17 +1,18 @@
+//displays the current date 
 var currentDay = moment().format("dddd, MMMM Do YYYY");
 $("#currentDay").text(currentDay);
 
 var saveBtn = $(".saveBtn");
 
 $(document).ready(function () {
-  // saveBtn click listener
+  // saveBtn click listener saves to localStorage
   $(".saveBtn").on("click", function () {
     var time = $(this).siblings(".hour").text();
     var input = $(this).siblings(".input").val();
 
     localStorage.setItem(time, input);
   });
-
+// tracks current hour of the day which works with css to color code the sections
   function timeTracker() {
     var hour = moment().hours();
 
@@ -33,6 +34,7 @@ $(document).ready(function () {
       }
     });
   }
+  // gets each individual item from localStorage
   $("#8 .input").val(localStorage.getItem("8AM"));
   $("#9 .input").val(localStorage.getItem("9AM"));
   $("#10 .input").val(localStorage.getItem("10AM"));
@@ -45,14 +47,3 @@ $(document).ready(function () {
   $("#17 .input").val(localStorage.getItem("5PM"));
   timeTracker();
 });
-
-function usePlanner() {
-  $(".hour").each(function () {
-    var currHour = $(this).text();
-    var currPlan = localStorage.getItem(currHour);
-
-    if (currPlan !== null) {
-      $($this).siblings(".input").val(currPlan);
-    }
-  });
-}
