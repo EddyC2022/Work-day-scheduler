@@ -6,7 +6,7 @@ var saveBtn = $(".saveBtn");
 
 $(document).ready(function () {
   // saveBtn click listener saves to localStorage
-  $(".saveBtn").on("click", function () {
+  $(".saveBtn").click(function () {
     var time = $(this).siblings(".hour").text();
     var input = $(this).siblings(".input").val();
 
@@ -34,16 +34,16 @@ $(document).ready(function () {
       }
     });
   }
-  // gets each individual item from localStorage
-  $("#8 .input").val(localStorage.getItem("8AM"));
-  $("#9 .input").val(localStorage.getItem("9AM"));
-  $("#10 .input").val(localStorage.getItem("10AM"));
-  $("#11 .input").val(localStorage.getItem("11AM"));
-  $("#12 .input").val(localStorage.getItem("12PM"));
-  $("#13 .input").val(localStorage.getItem("1PM"));
-  $("#14 .input").val(localStorage.getItem("2PM"));
-  $("#15 .input").val(localStorage.getItem("3PM"));
-  $("#16 .input").val(localStorage.getItem("4PM"));
-  $("#17 .input").val(localStorage.getItem("5PM"));
+  // pulls each plan from local storage and is placed into proper textarea
+  $('.hour').each(function() {
+    var currentHour = $(this).text();
+    var currentPlan = localStorage.getItem(currentHour);
+
+    if (currentPlan !== null) {
+      $(this).siblings('.input').val(currentPlan);
+    }
+  })
+
   timeTracker();
 });
+
